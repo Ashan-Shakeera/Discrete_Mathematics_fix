@@ -1,0 +1,184 @@
+Click Math V3
+
+interface size : 1038, 777
+icon : 67, 36
+location : 894, 12
+exit location: 929, 12
+Logout location : 856, 12
+----------------log details----------
+user name : ashan
+psw : 1234
+--------------------------
+Application.Exit();
+--------------------
+this.Hide();
+            Form1 obj = new Form1();
+            obj.Show();
+--------------------------------
+strin find (a)
+=================
+private void button1_Click(object sender, EventArgs e)
+        {
+            string input = textBox1.Text;
+            string searchString = textBox2.Text;
+            int count = input.Length - input.Replace(searchString, "").Length;
+            count /= searchString.Length;
+            label1.Text = "Count: " + count.ToString();
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Services obj = new Services();
+            obj.Show();
+        }
+-------------------------------
+check wether (b)
+==================
+// Get the set values from the text boxes
+            string[] setAValues = SetATextBox.Text.Split(',');
+            string[] setBValues = SetBTextBox.Text.Split(',');
+
+            int[] setA = Array.ConvertAll(setAValues, int.Parse);
+            int[] setB = Array.ConvertAll(setBValues, int.Parse);
+
+            // Check if setB is a subset of setA
+            bool isSubset = IsSubset(setA, setB);
+
+            // Display the result
+            ResultLabel.Text = "Is setB a subset of setA? " + isSubset;
+        }
+
+        static bool IsSubset(int[] setA, int[] setB)
+        {
+            // Convert setA to a HashSet for efficient lookup
+            HashSet<int> hashSetA = new HashSet<int>(setA);
+
+            // Loop through each element in setB
+            foreach (int element in setB)
+            {
+                // If an element in setB is not in setA, return false
+                if (!hashSetA.Contains(element))
+                {
+                    return false;
+                }
+            }
+
+            // If all elements in setB are in setA, return true
+            return true;
+---------------------------------------------------
+find subset (c)
+=================
+private void button1_Click(object sender, EventArgs e)
+        {
+            string[] values = txt.Text.Split(',');
+            int size = values.Length;
+            int count = (int)Math.Pow(2, size);
+            for (int i = 0; i < count; i++)
+            {
+                string subset = "{ ";
+                for (int j = 0; j < size; j++)
+                {
+                    if ((i & (1 << j)) > 0)
+                    {
+                        subset += values[j] + " ";
+                    }
+                }
+                subset += "}";
+                list.Items.Add(subset);
+            }
+        }
+-----------------------------------
+LOve scan 
+======================
+private void button1_Click(object sender, EventArgs e)
+        {
+            string name1 = textBox1.Text;
+            string name2 = textBox2.Text;
+
+            int lovePercentage = CalculateLovePercentage(name1, name2);
+
+            label1.Text = name1 + " and " + name2 + " are " + lovePercentage + "% compatible!";
+        }
+
+        private int CalculateLovePercentage(string name1, string name2)
+        {
+            int lovePercentage = 0;
+            int name1Length = name1.Length;
+            int name2Length = name2.Length;
+
+            // Add 5% for each letter in both names that match
+            for (int i = 0; i < name1Length; i++)
+            {
+                for (int j = 0; j < name2Length; j++)
+                {
+                    if (name1[i] == name2[j])
+                    {
+                        lovePercentage += 20;
+                    }
+                }
+            }
+
+            // Add 10% if both names have the same number of letters
+            if (name1Length == name2Length)
+            {
+                lovePercentage += 10;
+            }
+
+            // Add 15% if both names are the same
+            if (name1.Equals(name2, StringComparison.OrdinalIgnoreCase))
+            {
+                lovePercentage += 15;
+            }
+
+            // Return the love percentage, capped at 100%
+            return Math.Min(100, lovePercentage);
+
+            
+            
+        }
+
+--------------------------
+cal
+==============================
+namespace Click_Math_V1._1
+{
+    public partial class calcu : Form
+    {
+        public calcu()
+        {
+            InitializeComponent();
+        }
+        int n1, n2, ans;
+        double ans1;
+        private void bp_Click(object sender, EventArgs e)
+        {
+            n1 = int.Parse(txt1.Text);
+            n2 = int.Parse(txt2.Text);
+            ans = n1 + n2;
+            txt3.Text = ans.ToString();
+        }
+
+        private void bmi_Click(object sender, EventArgs e)
+        {
+            n1 = int.Parse(txt1.Text);
+            n2 = int.Parse(txt2.Text);
+            ans = n1 - n2;
+            txt3.Text = ans.ToString();
+        }
+
+        private void bmu_Click(object sender, EventArgs e)
+        {
+            n1 = int.Parse(txt1.Text);
+            n2 = int.Parse(txt2.Text);
+            ans = n1 * n2;
+            txt3.Text = ans.ToString();
+        }
+
+        private void bd_Click(object sender, EventArgs e)
+        {
+            n1 = int.Parse(txt1.Text);
+            n2 = int.Parse(txt2.Text);
+            ans1 = n1 / n2;
+            txt3.Text = ans1.ToString();
+        }
